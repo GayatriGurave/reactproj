@@ -1,8 +1,9 @@
-import { Box, Button } from '@mui/material';
+import { Box, Button, Card, CardActions, CardContent, Grid2, Typography } from '@mui/material';
 import { DatePicker, LocalizationProvider } from '@mui/x-date-pickers';
 import { AdapterDayjs } from "@mui/x-date-pickers/AdapterDayjs";
-import React, { useState } from 'react'
-
+import React, { useEffect, useState } from 'react'
+import dayjs from 'dayjs';
+import { Height } from '@mui/icons-material';
 const orders = [
     { orderNo: "ORD2001", customerName: "Rajesh Kumar", date: "2025-06-05", amount: 799, status: "Delivered" },
     { orderNo: "ORD2002", customerName: "Priya Sharma", date: "2025-06-12", amount: 650, status: "Pending" },
@@ -29,7 +30,17 @@ console.log(orders);
 const OrdersDate = () => {
     const [fromDate, setfromDate] = useState(null)
     const [toDate, settoDate] = useState(null)
-
+    const [filterData, setfilterData] = useState([orders])
+    // const [orderstatus, setorderstatus] = useState("")
+    useEffect(()=>{
+        let filterByDate = ()=>{
+            let filtered = orders.filter((ord)=>(new Date(ord.date)>dayjs(fromDate).toDate() &&
+             new Date(ord.date)<=dayjs(toDate).toDate()) )
+            setfilterData(filtered)
+            console.log("Orders",filtered);
+        }
+        filterByDate()
+    },[fromDate,toDate])
     return (
         <>
             <Box>
@@ -56,11 +67,33 @@ const OrdersDate = () => {
                     // renderInput={(params) => <TextField {...params} />}
                     />
                 </LocalizationProvider>
-                <Button variant='contained'color='success' >Find</Button>
-            </Box>
-            <Box>
+                {/* <Button variant='contained'color='success' >Find</Button> */}
 
             </Box>
+             <Box>
+            <Grid2 container spacing={3} padding={2}>
+            {
+                filterData.map((prod)=>{
+                    return(
+                        <Grid2 size={{sm:12,md:6,lg:3}} key={prod.customerName}>
+                        <Card sx={{height:"100%",width:"100%",mb:2}}/>
+                        <CardContent>
+                            <Typography variant='h4'>{prod.orderNo}</Typography>
+                            <Typography variant='h4'>{prod.customerName}</Typography>
+                            <Typography variant='h4'>{prod.date}</Typography>
+                            <Typography variant='h4'>{prod.amount}</Typography>
+                            <Typography variant='h4'>{prod.status}</Typography>
+                        </CardContent>
+                        <CardActions>
+                            
+                        </CardActions>
+                        </Grid2>
+                    )
+                })
+            }
+            </Grid2>
+            </Box>
+        
         </>
     )
 }

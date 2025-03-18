@@ -1,7 +1,12 @@
 import React from 'react'
 import { Button, Card, CardActions, CardContent, CardMedia, Grid2, Typography } from '@mui/material'
 import { useNavigate } from 'react-router-dom'
+import { addItem } from '../Reduxwork/CartSlice'
+import { useDispatch } from 'react-redux'
+
 const MyCard = ({data}) => {
+  
+    let dispatcher = useDispatch()
   let navigate = useNavigate()
             return (
                 <Grid2 size={{
@@ -22,7 +27,10 @@ const MyCard = ({data}) => {
                             <Typography variant='h5' color={data.price>15? "error" : "primary"}>{data.price}</Typography>
                         </CardContent>
                         <CardActions>
-                            <Button variant='outlined' color='success'>Add To Cart</Button>
+                            <Button onClick={()=>{
+                                dispatcher(addItem(data))
+                                alert('Added')
+                            }} variant='outlined' color='success'>Add To Cart</Button>
                             <Button variant='outlined' onClick={() => {
                                 navigate('/proddetails', { state: data })
                                 // setselectedProduct(prod)
@@ -35,9 +43,4 @@ const MyCard = ({data}) => {
         }
 
         
-    
-   
-  
-
-
 export default MyCard
