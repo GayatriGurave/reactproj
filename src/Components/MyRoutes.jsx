@@ -9,6 +9,8 @@ import Login from './Login'
 import Products from './products'
 import ProductDetails from './ProductDetails'
 import OrdersDate from './OrdersDate'
+import Cart from './Cart'
+import Profile from './Profile'
 const MyRoutes = () => {
     return (
         <>
@@ -23,6 +25,8 @@ const MyRoutes = () => {
                 <Route path='/product' element={<Products/>}/>
                 <Route path='/proddetails' element={<ProductDetails/>}/>
                 <Route path='/ordersdate' element={<OrdersDate/>}/>
+                <Route path='/cart' element={<Cart/>}/>
+                <Route path='/profile' element={<Profile/>}/>
             </Routes>
         </>
     )

@@ -1,4 +1,4 @@
-import { Box, Button, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid2, Stack, Typography } from '@mui/material'
+import { Box, Button, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid2, Slider, Stack, Typography } from '@mui/material'
 import axios, { all } from 'axios'
 import React, { useEffect, useState } from 'react'
 import { useNavigate } from 'react-router-dom'
@@ -15,6 +15,7 @@ const Products = () => {
 
     const [selectedCategory, setselectedCategory] = useState("All")
     const [filterData, setfilterData] = useState([])
+    const [value, setvalue] = useState(null)
     useEffect(()=> {
         //define function
         let fetchProducts = async () => {
@@ -37,6 +38,12 @@ const Products = () => {
       }
     }, [selectedCategory,allProducts])
     
+    useEffect (()=>{
+        //create variable and filter the value
+        let filterPrice = allProducts.filter((prd)=>prd.price<value)
+        console.log(filterPrice);
+        setfilterData(filterPrice)
+    },[value])
 
     let handleOpenDialog = () => {
         setisOpen(true)
@@ -44,9 +51,24 @@ const Products = () => {
     let handleCloseDialog = () => {
         setisOpen(false)
     }
-
+    //use range function
+    let handleChange=(event,newValue)=>{
+        setvalue(newValue)
+        console.log(newValue);
+    }
     return (
         <>
+        <Slider
+                 aria-label='Temperature'
+                 value={value}
+                 onChange={handleChange}
+                 valueLabelDisplay='auto'
+                 shiftStep={30}
+                 step={5}
+                 marks
+                 min={0}
+                 max={300}
+        />
         <Stack direction={'row'} spacing={1} margin={1}>
         <Chip label="All" onClick={()=>{setselectedCategory("All")}} variant='filled' color='primary'/>
         <Chip label="Beauty" onClick={()=>{setselectedCategory("beauty")}} variant='filled' color='primary'/>

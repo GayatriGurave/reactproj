@@ -5,16 +5,20 @@ import {
     RadioGroup,
     Typography
 } from '@mui/material'
-import { red } from '@mui/material/colors'
+// import { red } from '@mui/material/colors'
 import React from 'react'
+import { useDispatch } from 'react-redux'
+import { userProfile } from '../Reduxwork/UserSlice'
+
 
 const Register = () => {
-
+    let dispatcher = useDispatch()
     let submitFormData = (event) => {
         event.preventDefault()
         let formEntries = new FormData(event.target)
         let formDataObject = Object.fromEntries(formEntries.entries())
         console.log("DATA", formDataObject);
+        dispatcher(userProfile(formDataObject))
     }
 
     return (
