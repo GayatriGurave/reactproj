@@ -1,51 +1,48 @@
-import {
-    Box, Button, FormControl,
-    FormControlLabel, Radio,
-    FormLabel, TextField,
-    RadioGroup,
-    Typography
-} from '@mui/material'
-// import { red } from '@mui/material/colors'
+import { Box, Button, FormControl, FormControlLabel, FormLabel, Radio, RadioGroup, TextField } from '@mui/material'
 import React from 'react'
-import { useDispatch } from 'react-redux'
-import { userProfile } from '../Reduxwork/UserSlice'
+ //import { useNavigate } from 'react-router-dom'
+ import { register } from '../Reduxwork/UserSlice'
+ import { useDispatch } from 'react-redux'
+
 
 
 const Register = () => {
-    let dispatcher = useDispatch()
+    //  let navigate = useNavigate()
+
+     let dispatcher=useDispatch()
     let submitFormData = (event) => {
         event.preventDefault()
         let formEntries = new FormData(event.target)
         let formDataObject = Object.fromEntries(formEntries.entries())
         console.log("DATA", formDataObject);
-        dispatcher(userProfile(formDataObject))
-    }
+         dispatcher(register(formDataObject))
+     
 
+        
+    }
+    
     return (
         <>
-            <Typography variant='h4'>Register User</Typography>
-
+        
             <Box sx={{
-                display: 'flex',
-                alignItems: "center",
+                height: "100vh", width: "100%",
+                display: "flex",
                 justifyContent: "center",
-                height: "100vh",
-                width: "100%"
+                alignItems: "center",
+                backgroundColor: "ButtonFace",
             }}>
+
                 <Box component="form"
-                    onSubmit={(e) => submitFormData(e)}
-                    sx={{
-                        display: "flex",
-                        flexDirection: "column",
-                        gap: "10px"
-                    }}>
+                    onSubmit={(e) => submitFormData(e) } 
+                 
+                         
+                    sx={{ display: "flex", flexDirection: "column", gap: 3 }}>
                     <TextField type='text' label="Enter User Name" variant='outlined' name='userName'></TextField>
                     <TextField type='email' label="Enter User Email" variant='outlined' name='userEmail'></TextField>
-                    <TextField type='tel' label="Enter User Mobile" variant='outlined' name='userMobile'></TextField>
-                    <TextField type='password' label="Enter User Password" variant='outlined' name='userPassword'></TextField>
-
+                    <TextField type='tel' label="Enter the user number" variant='outlined' name='UserMob'></TextField>
+                    <TextField type='password'  label="Enter the password" variant='outlined' name='userPassword'></TextField>
                     <FormControl>
-                        <FormLabel id="gender">Gender</FormLabel>
+                        <FormLabel id="demo-radio-buttons-group-label">Gender</FormLabel>
                         <RadioGroup
                             row
                             defaultValue="female"
@@ -56,11 +53,12 @@ const Register = () => {
                             <FormControlLabel value="other" control={<Radio />} label="Other" />
                         </RadioGroup>
                     </FormControl>
-
-                    <Button type='submit' variant='contained' color='success'>
-                        Reginster
-                    </Button>
+                    <Button 
+              
+                    type='submit' 
+                    variant='contained' color='success' name='button' >Register</Button>
                 </Box>
+
             </Box>
         </>
     )

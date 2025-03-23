@@ -11,6 +11,9 @@ import ProductDetails from './ProductDetails'
 import OrdersDate from './OrdersDate'
 import Cart from './Cart'
 import Profile from './Profile'
+import Dashboard from './Dashboard'
+import Addprod from './Addprod'
+import Allprod from './Allprod'
 const MyRoutes = () => {
     return (
         <>
@@ -27,6 +30,9 @@ const MyRoutes = () => {
                 <Route path='/ordersdate' element={<OrdersDate/>}/>
                 <Route path='/cart' element={<Cart/>}/>
                 <Route path='/profile' element={<Profile/>}/>
+                <Route path='/dash' element={<Dashboard/>}/>
+                <Route path='/allprod' element={<Allprod/>}/>
+                <Route path='/addprod' element={<Addprod/>}/>
             </Routes>
         </>
     )

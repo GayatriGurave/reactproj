@@ -1,26 +1,33 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
-     user : {}
+    userdata :{},
+    users:[]
 }
 
-const userSlice = createSlice({
-    name : "profile",
+let UserSlice = createSlice({
+    name:"Register",
     initialState,
-    reducers : {
-        userProfile :(state,actions)=>{
-            state.user ={...actions.payload} 
+    reducers:{
+        register:(state,actions)=>{
+            state.users=[...state.users,actions.payload]
         },
         logout:(state)=>{
-            state.user={}
+            state.userdata={}
+        },
+        login:(state,actions)=>{
+            let {userEmail,userPassword}=actions.payload
+            let User = state.users.find((usr)=>usr.userEmail==userEmail)
+            if(!User){
+                alert("not registered")
+            }
+            if(User.userPassword==userPassword){
+                state.userdata=User
+            }
         }
-
-       
     }
 })
 
-export const {
-    userProfile,logout
-}=userSlice.actions
+export const {register,logout,login} = UserSlice.actions
 
-export default userSlice.reducer
+export default UserSlice.reducer

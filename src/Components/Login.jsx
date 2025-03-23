@@ -4,21 +4,30 @@ import {
     Typography
 } from '@mui/material'
 import {useNavigate} from 'react-router-dom'
+ import { useDispatch } from 'react-redux'
+ import {login} from '../Reduxwork/UserSlice'
+
+
 const Login = () => {
+    
     let navigate = useNavigate()
+     let dispatcher = useDispatch()
     let submitFormData = (event) => {
         event.preventDefault()
         let formEntries = new FormData(event.target)
         let formDataObject = Object.fromEntries(formEntries.entries())
         console.log("DATA", formDataObject);
-        if(formDataObject.userName=="gayu123" && formDataObject.userPassword=="gayu@2003"){
-            navigate('/')
-        }
-        else{
-            alert("error incorrect Password")
-        }
+        dispatcher(login(formDataObject))
+        navigate('/product')
+        // if(formDataObject.userName=="gayu123" && formDataObject.userPassword=="gayu@2003"){
+        //     navigate('/')
+        // }
+        
+    //     else{
+    //         alert("error incorrect Password")
+    //     }
+    // 
     }
-    
     return (
         <>
             <Typography variant='h4'>Login User</Typography>
@@ -42,7 +51,7 @@ const Login = () => {
 
                     
 
-                    <Button type='submit' variant='contained' color='success'>
+                    <Button type='submit' variant='contained' color='success' >
                         Login
                     </Button>
                 </Box>
