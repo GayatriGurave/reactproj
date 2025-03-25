@@ -11,10 +11,19 @@ let CartSlice = createSlice({
     initialState,
     reducers: {
         addItem: (state, actions) => {
-            let newItem = { ...actions.payload, qty: 1 }
-            state.cartItems = [...state.cartItems, newItem]
+            // let newItem = { ...actions.payload, qty: 1 }
+            // state.cartItems = [...state.cartItems, newItem]
             state.cartItemCount = state.cartItems.length
-
+            let existItem = state.cartItems.find(item=>item.id===actions.payload.id)
+            if(existItem){
+                existItem.qty=1
+            }
+            else{
+                let newItem = { ...actions.payload, qty: 1 }
+                state.cartItems.push(newItem)
+            }
+            
+            state.cartItemCount=state.cartItems.reduce((sum,item)=>sum+item.qty,0)
         },
         incrementQty: (state, actions) => {
             let prod = state.cartItems.find((item) => item.id == actions.payload.pId)

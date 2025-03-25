@@ -1,13 +1,17 @@
-import { AppBar, Box, Button, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
+import { AppBar, Badge, Box, Button, Drawer, IconButton, List, ListItem, ListItemIcon, ListItemText, Toolbar, Typography } from '@mui/material'
 import React, { useState } from 'react'
 import { useNavigate } from 'react-router-dom'
 import MenuIcon from '@mui/icons-material/Menu';
 import ListIcon from '@mui/icons-material/List'
 import DashboardIcon from '@mui/icons-material/Dashboard';
 import AddBoxIcon from '@mui/icons-material/AddBox';
+import AddShoppingCartIcon from '@mui/icons-material/AddShoppingCart';
 import FormatListBulletedIcon from '@mui/icons-material/FormatListBulleted';
+import { useSelector } from 'react-redux';
 const MyAppBar = () => {
     let navigate = useNavigate()
+    const {cartItemCount} = useSelector((state)=>state.cart)
+  
     const [isDrawOpen, setDrawOpen] = useState(false)
     let handeleDrawerOpen=()=>{
         setDrawOpen(true)
@@ -40,7 +44,10 @@ const MyAppBar = () => {
                     }}>
                         <List sx={{
                             display: "flex",
-                            cursor: "pointer"
+                            gap:'10px',
+                            cursor: "pointer",
+                            width:"100%"
+                            
                         }}>
                             <ListItem onClick={() => navigate("/")}>
                                 <ListItemText>Home</ListItemText>
@@ -64,7 +71,10 @@ const MyAppBar = () => {
                                 <ListItemText>Orders</ListItemText>
                             </ListItem>
                             <ListItem onClick={()=>navigate("/cart")}>
-                                <ListItemText>Cart</ListItemText>
+                                <ListItemText>AddtoCart</ListItemText> 
+                                <Badge badgeContent={cartItemCount} color='error'>
+                                    <AddShoppingCartIcon/>
+                                </Badge>
                             </ListItem>
                             <ListItem onClick={()=>navigate("/profile")}>
                                 <ListItemText>Profile</ListItemText>
