@@ -29,7 +29,7 @@ const MyCard = ({data}) => {
                         <CardActions>
                             <Button onClick={()=>{
                                 dispatcher(addItem(data))
-                                alert('Added')
+                                // alert('Added')
                             }} variant='outlined' color='success'>Add To Cart</Button>
                             <Button variant='outlined' onClick={() => {
                                 navigate('/proddetails', { state: data })
