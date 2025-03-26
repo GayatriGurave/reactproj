@@ -1,7 +1,7 @@
 import { Box, Button, Chip, Dialog, DialogActions, DialogContent, DialogContentText, DialogTitle, Grid2, Slider, Stack, Typography } from '@mui/material'
-import axios, { all } from 'axios'
+import axios from 'axios'
 import React, { useEffect, useState } from 'react'
-import { useNavigate } from 'react-router-dom'
+// import { useNavigate } from 'react-router-dom'
 import MyCard from './MyCard'
 
 
@@ -11,7 +11,7 @@ const Products = () => {
     const [isOpen, setisOpen] = useState(false)
     const [selectedProduct, setselectedProduct] = useState(null)
     const [allProducts, setallProducts] = useState([])
-    let navigate = useNavigate()
+    // let navigate = useNavigate()
 
     const [selectedCategory, setselectedCategory] = useState("All")
     const [filterData, setfilterData] = useState([])

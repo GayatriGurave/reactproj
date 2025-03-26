@@ -1,38 +1,24 @@
-import { Box, Button, Typography } from '@mui/material'
 import React from 'react'
- import { useDispatch, useSelector } from 'react-redux'
- import { logout } from '../Reduxwork/UserSlice'
+import { Box, Button, Typography } from '@mui/material'
+import { logout } from '../Reduxwork/UserSlice'
+import { useDispatch, useSelector } from 'react-redux'
 
 const Profile = () => {
-     let dispatcher = useDispatch()
-     let { userdata } = useSelector((state) => state.register)
-    return (
-        <Box>
-            <Box sx={{ display: 'flex', gap: 3 }}>
-                <Typography>Name:{userdata.userName}</Typography>
-                <Typography>Password:{userdata.userPassword}</Typography>
-                <Typography>Email:{userdata.userEmail}</Typography>
-                <Typography>Email:{userdata.UserMob}</Typography>
-                <Button
-                    onClick={() => {
-                         dispatcher(logout())
-                    }}
-                    variant='contained' color='secondary'>Logout</Button>
-            </Box>
-
-        </Box>
-
-    )
+  let dispatcher = useDispatch()
+  let {userdata}=useSelector((state)=>state.Register)
+  return (
+    <>
+    {/* <Typography variant='h4'>Profile</Typography> */}
+    <Box>
+      <Typography variant='h6'>Name:{userdata.userName}</Typography>
+      <Typography variant='h6'>Password:{userdata.userPassword}</Typography>
+      <Typography variant='h6'>Email:{userdata.userEmail}</Typography>
+      <Typography variant='h6'>Mobile:{userdata.userMobNo}</Typography>
+      <Typography variant='h6'>Gender:{userdata.gender}</Typography>
+      <Button onClick={()=>{dispatcher(logout())}} variant='contained' color='error'>Logout</Button>
+    </Box>
+    </>
+  )
 }
 
 export default Profile
-
-// import React from 'react'
-
-// const Profile = () => {
-//   return (
-//     <div>Profile</div>
-//   )
-// }
-
-// export default Profile

@@ -54,7 +54,7 @@ const Register = () => {
                         </RadioGroup>
                     </FormControl>
                     <Button 
-              
+                    onSubmit={submitFormData}
                     type='submit' 
                     variant='contained' color='success' name='button' >Register</Button>
                 </Box>
